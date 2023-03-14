@@ -1,16 +1,36 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def functie(tabel,stare_actuala,litera_actuala):
+    for posibilitate in tabel:
+        if stare_actuala==posibilitate[0] and litera_actuala==posibilitate[1]:
+            return posibilitate[2]
+
+print("AUTOMAT FINIT DETERMINIST- PARAMETRII")
+
+with open("ex2.txt","r") as f:
+    stari=[str(x) for x in f.readline().strip().split()]
+    alfabet=[str(x) for x in f.readline().strip().split()]
+    tabel=[]
+    for stare in stari:
+        for litera in alfabet:
+            stare_echivalenta = str(f.readline().strip())
+            tabel.append((stare,litera,stare_echivalenta))
+    stare_initiala=str(f.readline().strip())
+    stare_finala=[str(x) for x in f.readline().strip().split()]
+print("CUVANT")
+cuvant=str(input("Cuvant= "))
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+stare_actuala=stare_initiala
+traseu=[stare_actuala]
+for index in range(len(cuvant)):
+    stare_actuala=functie(tabel,stare_actuala,cuvant[index])
+    traseu.append(stare_actuala)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if stare_actuala not in stare_finala:
+    print("neacceptabil")
+else:
+    print("acceptabil")
+    for stare in traseu:
+        print(f"{stare} -> ",end="")
+    print("IESIRE",end="")
