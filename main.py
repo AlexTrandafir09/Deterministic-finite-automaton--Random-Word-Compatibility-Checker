@@ -1,36 +1,32 @@
+def function(chart, actual_state, actual_letter):
+    for posibility in chart:
+        if actual_state==posibility[0] and actual_letter==posibility[1]:
+            return posibility[2]
 
-def functie(tabel,stare_actuala,litera_actuala):
-    for posibilitate in tabel:
-        if stare_actuala==posibilitate[0] and litera_actuala==posibilitate[1]:
-            return posibilitate[2]
+print(" Deterministic finite automaton- Parameters")
+states=[str(x) for x in input("Type all the states of the automaton: ").strip().split()]
+alfabet=[str(x) for x in input("Type all the letters of the automaton: ").strip().split()]
+chart=[]
+for state in states:
+    for letter in alfabet:
+        equivalent_state = str(input(f"f({state},{letter})=").strip())
+        chart.append((state, letter, equivalent_state))
+initial_state=str(input("Type the initial state: ").strip())
+final_states=[str(x) for x in input("Type all the final states: ").strip().split()]
+print("Word")
+word=str(input("Word= "))
 
-print("AUTOMAT FINIT DETERMINIST- PARAMETRII")
-
-with open("ex2.txt","r") as f:
-    stari=[str(x) for x in f.readline().strip().split()]
-    alfabet=[str(x) for x in f.readline().strip().split()]
-    tabel=[]
-    for stare in stari:
-        for litera in alfabet:
-            stare_echivalenta = str(f.readline().strip())
-            tabel.append((stare,litera,stare_echivalenta))
-    stare_initiala=str(f.readline().strip())
-    stare_finala=[str(x) for x in f.readline().strip().split()]
-print("CUVANT")
-cuvant=str(input("Cuvant= "))
-
-
-stare_actuala=stare_initiala
-traseu=[stare_actuala]
-for index in range(len(cuvant)):
-    stare_actuala=functie(tabel,stare_actuala,cuvant[index])
-    traseu.append(stare_actuala)
+actual_state=initial_state
+route=[actual_state]
+for index in range(len(word)):
+    actual_state=function(chart, actual_state, word[index])
+    route.append(actual_state)
 
 
-if stare_actuala not in stare_finala:
-    print("neacceptabil")
+if actual_state not in final_states:
+    print("Not acceptable.")
 else:
-    print("acceptabil")
-    for stare in traseu:
-        print(f"{stare} -> ",end="")
-    print("IESIRE",end="")
+    print("Acceptable.")
+    for state in route:
+        print(f"{state} -> ", end="")
+    print("exit",end="")
