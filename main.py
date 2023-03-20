@@ -1,32 +1,16 @@
-def function(chart, actual_state, actual_letter):
-    for posibility in chart:
-        if actual_state==posibility[0] and actual_letter==posibility[1]:
-            return posibility[2]
+# This is a sample Python script.
 
-print(" Deterministic finite automaton- Parameters")
-states=[str(x) for x in input("Type all the states of the automaton: ").strip().split()]
-alfabet=[str(x) for x in input("Type all the letters of the automaton: ").strip().split()]
-chart=[]
-for state in states:
-    for letter in alfabet:
-        equivalent_state = str(input(f"f({state},{letter})=").strip())
-        chart.append((state, letter, equivalent_state))
-initial_state=str(input("Type the initial state: ").strip())
-final_states=[str(x) for x in input("Type all the final states: ").strip().split()]
-print("Word")
-word=str(input("Word= "))
-
-actual_state=initial_state
-route=[actual_state]
-for index in range(len(word)):
-    actual_state=function(chart, actual_state, word[index])
-    route.append(actual_state)
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-if actual_state not in final_states:
-    print("Not acceptable.")
-else:
-    print("Acceptable.")
-    for state in route:
-        print(f"{state} -> ", end="")
-    print("exit",end="")
+def print_hi(name):
+    # Use a breakpoint in the code line below to debug your script.
+    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    print_hi('PyCharm')
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
